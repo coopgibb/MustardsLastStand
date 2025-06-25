@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mustard's Last Stand | Modern Chicago Dogs in Denver & Boulder</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Bangers&display=swap');
+
+        :root {
+            --primary-yellow: #FFC72C;
+            --primary-red: #DA291C;
+            --dark-blue: #2C3E50;
+            --light-gray: #F8F9FA;
+            --white: #FFFFFF;
+            --text-color: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-gray);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'Bangers', cursive;
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap; /* UPDATED: Prevents the logo text from wrapping */
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-blue);
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+        
+        .nav-toggle {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--dark-blue);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/cVCfK5r.png') no-repeat center center/cover;
+            color: var(--white);
+            text-align: center;
+            padding: 100px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-family: 'Bangers', cursive;
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-shadow: 4px 4px 0px var(--primary-red);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-yellow);
+            color: var(--dark-blue);
+        }
+        
+        .btn-secondary {
+            background-color: var(--primary-red);
+            color: var(--white);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* --- Section Styling --- */
+        .section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Bangers', cursive;
+            font-size: 3.5rem;
+            color: var(--dark-blue);
+            margin-bottom: 3rem;
+        }
+
+        /* --- About Section --- */
+        #about {
+            background: var(--white);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            color: var(--primary-red);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-image {
+            flex: 1;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        /* --- Menu Highlights --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item-card {
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            padding: 2rem;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .menu-item-card:hover {
+            transform: scale(1.05);
+        }
+
+        .menu-item-card h4 {
+            font-size: 1.5rem;
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+        }
+        
+        .menu-item-card p {
+            flex-grow: 1;
+        }
+
+        /* --- Locations Section --- */
+        #locations {
+            background: var(--white);
+        }
+        
+        .locations-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .location-card {
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden; /* Ensures map corners are rounded */
+        }
+
+        .map-placeholder {
+            height: 300px;
+            background-color: #e0e0e0;
+        }
+
+        .map-placeholder iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        .location-details {
+            padding: 2rem;
+        }
+
+        .location-details h3 {
+            font-family: 'Bangers', cursive;
+            font-size: 2.5rem;
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .location-details p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .delivery-options a {
+            display: inline-block;
+            margin-right: 10px;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: var(--dark-blue);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+        
+        .delivery-options a:hover {
+            background: var(--primary-red);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--dark-blue);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-content h3 {
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            color: var(--primary-yellow);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-contact p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            header {
+                height: auto;
+            }
+            nav {
+                flex-direction: column;
+                align-items: center; /* Ensures logo is centered */
+                position: relative;
+                padding-bottom: 1rem;
+            }
+            .logo {
+                margin-bottom: 1rem;
+                font-size: 2.2rem; /* UPDATED: Slightly smaller font for mobile */
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: var(--white);
+                padding: 2rem 0;
+                text-align: center;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-toggle {
+                display: block;
+                position: absolute;
+                top: 22px; /* UPDATED: Adjusted for new logo size */
+                right: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="#home" class="logo">
+                 <img src="https://i.imgur.com/jhu57fF.png" alt="Mustard's Logo" style="height: 40px; vertical-align: middle; margin-right: 10px;">
+                 Mustard's Last Stand
+                </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="MustardsLastMenu.html">Menu</a></li>
+                <li><a href="#locations">Locations</a></li>
+                <li><a href="MustardsCatering.html">Catering</a></li>
+            </ul>
+            <div class="nav-toggle" id="nav-toggle">&#9776;</div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h1>Chicago's Best, Colorado's Favorite.</h1>
+            <p>High-Quality, Quick-Service Food With Soul. Serving Denver & Boulder for over 40 years!</p>
+            <div class="cta-buttons">
+                <a href="#locations" class="btn btn-primary">Order for Pickup</a>
+                <a href="#locations" class="btn btn-secondary">Order for Delivery</a>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">Straight From Chicago to You</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Meet the Owner, Dan Polovin</h3>
+                        <p>For more than 40 years, diners in Denver and Boulder have come to Mustard’s Last Stand when they want fast food’s ultimate creation -- the Chicago-style hot dog. I opened Mustard’s to bring the Chicago hot dog experience home to Colorado.</p>
+                        <p>We look forward to the chance to serve you some Chicago classics -- and some local favorites you won’t find anywhere else!</p>
+                        <br>
+                        <p><strong>Looking for vegetarian or gluten-free options? We’ve got plenty of those too. Come by, have a bite and say hello!</strong></p>
+                    </div>
+                    <img src="https://i.imgur.com/ly1VLJz.jpeg" alt="Owner Dan Polovin" class="about-image">
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="section">
+            <div class="container">
+                <h2 class="section-title">Fan Favorites</h2>
+                <div class="menu-grid">
+                    <a href="MustardsLastMenu.html#hot-dogs" class="menu-item-card">
+                        <h4>Chicago-Style Hot Dog</h4>
+                        <p>The legend itself. The ultimate creation, served just the way it should be.</p>
+                    </a>
+                    <a href="MustardsLastMenu.html#hot-dogs" class="menu-item-card">
+                        <h4>HOT Monster Polish</h4>
+                        <p>For big appetites! A delicious, filling 8-inch, 1/3 pound sausage created with Mike Ditka.</p>
+                    </a>
+                    <a href="MustardsLastMenu.html#burgers" class="menu-item-card">
+                        <h4>1/4 lb. Hamburger</h4>
+                        <p>All-natural, grass-fed, antibiotic- and hormone-free beef, charbroiled to perfection.</p>
+                    </a>
+                    <a href="MustardsLastMenu.html#extras" class="menu-item-card">
+                        <h4>Fries</h4>
+                        <p>These aren’t your average spuds! Handcut real potatoes fried in rice oil with just the right amount of salt.</p>
+                    </a>
+                </div>
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="MustardsLastMenu.html" class="btn btn-secondary">View Full Menu</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="locations" class="section">
+            <div class="container">
+                <h2 class="section-title">Find Us!</h2>
+                <p style="text-align:center; max-width: 600px; margin: -2rem auto 3rem auto;">
+                    <strong>Hours (both locations):</strong> OPEN DAILY: 11 a.m. -- 8 p.m. (Hours may be subject to change)
+                </p>
+                <!-- UPDATED: Integrated Grid Structure -->
+                <div class="locations-grid">
+                    <div class="location-card">
+                        <div class="map-placeholder">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3058.835696657931!2d-105.2837639846183!3d40.0144511794135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bec25917aa285%3A0x6caa7f6ffc14e0cf!2sMustard&#39;s%20Last%20Stand!5e0!3m2!1sen!2sus!4v1655320800000!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="location-details">
+                            <h3>Boulder</h3>
+                            <p><strong>Address:</strong> 1719 Broadway, Boulder, CO</p>
+                            <p style="margin-bottom: 1rem;"><strong>Phone:</strong> <a href="tel:303-444-5841">303-444-5841</a></p>
+                            <a href="https://app.upserve.com/s/mustards-last-stand-boulder" class="btn btn-primary">Order Pickup</a>
+                            <div class="delivery-options">
+                                <p style="margin-top: 1rem;"><strong>Delivery:</strong></p>
+                                <a href="https://www.doordash.com/store/mustard's-laststand-boulder-24194923/58688546/?srsltid=AfmBOooCJHsGK2CpM-6VhF9ikmK-DsathqyxlAJCscQomeD37CJo9wA3">DoorDash</a>
+                                <a href="https://www.ubereats.com/store/mustards-last-stand-boulder/QBUFME7yX-2t1uKna7jELg?srsltid=AfmBOoq20_NGtiWRA87Vj5J93EMIEEzb46dqWojmofgS87UvMxkGrNH7">Uber Eats</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="location-card">
+                        <div class="map-placeholder">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.650121205706!2d-104.96226858833025!3d39.67894297144913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876c7e1506df5e0b%3A0xf8ac3f4ab4316e23!2sMustard&#39;s%20Last%20Stand!5e1!3m2!1sen!2sus!4v1750093169174!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="location-details">
+                            <h3>Denver</h3>
+                            <p><strong>Address:</strong> 2081 S. University Blvd, Denver, CO</p>
+                            <p style="margin-bottom: 1rem;"><strong>Phone:</strong> <a href="tel:303-722-7936">303-722-7936</a></p>
+                            <a href="https://app.upserve.com/s/mustards-last-stand-denver" class="btn btn-primary">Order Pickup</a>
+                            <div class="delivery-options">
+                                 <p style="margin-top: 1rem;"><strong>Delivery:</strong></p>
+                                <a href="https://www.doordash.com/store/mustard's-last-stand-denver-56201/43898788/?srsltid=AfmBOorWhTalse6CScVDUeQuZTnSJztpSe2jdonJbh2ou4U9VuVA-OI3">DoorDash</a>
+                                <a href="https://www.grubhub.com/restaurant/mustards-last-stand-2081-s-university-blvd-denver/3278756">GrubHub</a>
+                                <a href="https://www.ubereats.com/store/mustards-last-stand-denver/FDOFmY0rU42T3l6NzEDt0w?srsltid=AfmBOookDvmYm6CIKNgosZV0MDTwL1SKnDZ4-t3LJM7GGzBhB7f5POIb">Uber Eats</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="catering" class="section" style="background: var(--primary-yellow);">
+             <div class="container" style="text-align:center;">
+                <h2 class="section-title" style="color: var(--dark-blue);">Have an Event?</h2>
+                <p style="max-width: 600px; margin: 0 auto 2rem auto; color: var(--dark-blue);">Let us bring the taste of Chicago to you! We can cater your next event, big or small. Gift certificates are also available!</p>
+                <a href="MustardsCatering.html" class="btn btn-secondary">Explore Catering Options</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <h3>Mustard's Last Stand</h3>
+            <div class="footer-contact">
+                <p><strong>Boulder:</strong> 1719 Broadway, Boulder, CO | Phone: 303-444-5841</p>
+                <p><strong>Denver:</strong> 2081 S. University Blvd, Denver, CO | Phone: 303-722-7936</p>
+            </div>
+            <p class="copyright">
+                Copyright © 2015-2025 Mustard's Last Stand. All rights reserved.
+                <br>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            if (link.href.includes('#')) {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                    }
+                });
+            }
+        });
+
+        // Smooth Scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Scroll Animation
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+
+</body>
+</html>
